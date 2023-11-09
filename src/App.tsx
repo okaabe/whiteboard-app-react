@@ -1,6 +1,11 @@
+import DrawingTool from "./components/tools/drawingTool";
+import ToastHookProvider from "./hooks/toastify/toast";
+
 const App = () => {
   return (
-    <h1>Hello World</h1>
+    <ToastHookProvider>
+      <DrawingTool />
+    </ToastHookProvider>
   )
 }
 
