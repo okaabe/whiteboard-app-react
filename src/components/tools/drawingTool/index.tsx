@@ -74,7 +74,7 @@ const DrawingTool = () => {
     const handleOnMouseDownEvent = (event: CanvasMouseEvent) => {
         setDrawingAtTheMoment(true)
 
-        logger.debug("Started the drawing process")
+        // logger.debug("Started the drawing process")
 
         setElementsOnScreen((currentElementsOnScreen) => {
             return [...currentElementsOnScreen, makeElement(
@@ -91,29 +91,23 @@ const DrawingTool = () => {
             return
         }
 
-        console.log(`[${event.clientX}, ${event.clientY}]`)
+
+        const copiedElementsOnScreenArray = [...elementsOnScreen]
+        const target = copiedElementsOnScreenArray[copiedElementsOnScreenArray.length - 1]
+
+        const finishedElement = makeElement(
+            target.positionXStart,
+            target.positionYStart,
+            event.clientX,
+            event.clientY
+        )
+
+        copiedElementsOnScreenArray[copiedElementsOnScreenArray.length - 1] = finishedElement
+        setElementsOnScreen(copiedElementsOnScreenArray)
     }
 
     const handleOnMouseUpEvent = (event: CanvasMouseEvent) => {
         setDrawingAtTheMoment(false)
-        logger.debug("Finished the drawing process")
-
-        setElementsOnScreen((currentElementsOnScreen) => {
-            const target = currentElementsOnScreen[currentElementsOnScreen.length - 1]
-
-            const finishedElement = makeElement(
-                target.positionXStart,
-                target.positionYStart,
-                event.clientX,
-                event.clientY
-            )
-
-            currentElementsOnScreen[currentElementsOnScreen.length - 1] = finishedElement
-    
-            return currentElementsOnScreen
-        })
-
-        // console.log(elementsOnScreen)
     }
 
     return (
