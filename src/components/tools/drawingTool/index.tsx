@@ -6,8 +6,9 @@ import logger from "../../../hooks/toastify/logger";
 import {
     Elements,
     Element,
-    CanvasMouseEvent
 } from "./types";
+
+import { CanvasMouseEvent } from "../types"
 
 const rough = roughJS.generator()
 

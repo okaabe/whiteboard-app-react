@@ -1,10 +1,5 @@
 import { Drawable } from "roughjs/bin/core"
 
-export type CanvasMouseEvent = {
-    clientX: number
-    clientY: number
-}
-
 export type Element = {
     positionXStart: number
     positionXEnd: number
