@@ -1,70 +1,60 @@
-//@ts-nocheck
-import { useEffect, useState, useRef } from "react"
-import { Point, Points } from "./types"
+import {
+    useEffect,
+    useState,
+    useRef
+} from "react"
+import { Position } from "./types"
 import { CanvasMouseEvent } from "../types"
-import logger from "../../../hooks/toastify/logger"
 
-const MOUSE_POSITION = [0, 0]
-
-const makePoint = (positionX: number, positionY: number): Point => {
-    return {
-        positionX,
-        positionY
-    }
-}
+const MOUSE_POSITION = { x: 0, y: 0 }
 
 const PencilTool = () => {
-    const [pointsOnScreen, setPointsOnScreen] = useState<Points>([])
-    const [isDrawingAtTheMoment, setIsDrawingAtTheMoment] = useState<boolean>(false)
-    const canvasContextReference = useRef<CanvasRenderingContext2D | null>(null)
+    const [points, setPoints] = useState<Position[]>([])
+    const [isDrawing, setIsDrawing] = useState<boolean>(false)
+
+    const contextRef = useRef<CanvasRenderingContext2D | null>(null)
 
     useEffect(() => {
-        const canvas: any = document.getElementById("pencil_tool")
-        const canvas2DContext: CanvasRenderingContext2D = canvas.getContext("2d")
-        
-        canvasContextReference.current = canvas2DContext
+        const canvas: any = document.getElementById("paint_tool")
+        const ctx: CanvasRenderingContext2D = canvas.getContext("2d");
 
-        canvas2DContext.clearRect(0, 0, canvas.width, canvas.height)
-        canvas2DContext.lineCap = "round"
-        canvas2DContext.strokeStyle = "black"
-        canvas2DContext.lineWidth = 2
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        ctx.lineCap = "round"
+        ctx.strokeStyle = "black"
+        ctx.lineWidth = 2
 
-        pointsOnScreen.forEach((pointOnScreen) => {
-            canvas2DContext.lineTo(pointOnScreen.positionX, pointOnScreen.positionY)
-            canvas2DContext.stroke()
+        contextRef.current = ctx
+
+        points.forEach((point) => {
+            contextRef.current?.lineTo(point.x, point.y)
+            contextRef.current?.stroke()
         })
-    }, [pointsOnScreen])
+    }, [points])
 
     const handleOnMouseDown = (event: CanvasMouseEvent) => {
-        setIsDrawingAtTheMoment(true)
+        setIsDrawing(true)
 
-        MOUSE_POSITION[0] = event.clientX
-        MOUSE_POSITION[1] = event.clientY
+        MOUSE_POSITION.x = event.clientX
+        MOUSE_POSITION.y = event.clientY
     }
 
-    const handleOnMouseUp = (event: CanvasMouseEvent) => {
-        setIsDrawingAtTheMoment(false)
-    }
-
+    const handleOnMouseUp = () => setIsDrawing(false)
     const handleOnMouseMove = (event: CanvasMouseEvent) => {
-        if (!isDrawingAtTheMoment) return;
+        if (!isDrawing) return
 
-        setPointsOnScreen((state) => [...state, {
-            positionX: MOUSE_POSITION[0],
-            positionY: MOUSE_POSITION[1]
-        }]);
-        canvasContextReference.current.moveTo(MOUSE_POSITION[0], MOUSE_POSITION[1]);
+        setPoints((state) => [...state, MOUSE_POSITION])
+        contextRef.current?.moveTo(MOUSE_POSITION.x, MOUSE_POSITION.y)
 
-        const { clientX, clientY } = event;
-        MOUSE_POSITION[0] = clientX;
-        MOUSE_POSITION[1] = clientY;
+        MOUSE_POSITION.x = event.clientX
+        MOUSE_POSITION.y = event.clientY
     }
 
     return (
         <canvas 
-            id="pencil_tool"
+            id="paint_tool"
             width={window.innerWidth}
             height={window.innerHeight}
+
             onMouseDown={handleOnMouseDown}
             onMouseUp={handleOnMouseUp}
             onMouseMove={handleOnMouseMove}

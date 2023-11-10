@@ -1,6 +1,4 @@
-export type Point = {
-    positionX: number
-    positionY: number
+export type Position = {
+    x: number
+    y: number
 }
-
-export type Points = Point[]
