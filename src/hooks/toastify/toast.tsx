@@ -1,5 +1,5 @@
 import { ToastContainer, toast } from "react-toastify"
-import { Props } from "../../util/reactTypes"
+import { Props } from "../../util/types"
 
 import 'react-toastify/dist/ReactToastify.css';
 
