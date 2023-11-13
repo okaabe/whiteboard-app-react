@@ -45,7 +45,6 @@ export const handleOnMouseMove = ({
     })
 
     setElements(copied)
-    console.log(`Ponteiro: [${event.clientX}, ${event.clientY}]`, "\nDesenhado: ", target)
 }
 
 export const handleOnMouseUp = ({ setDrawing, elements, event, setElements }: ToolHandlingParams) => {

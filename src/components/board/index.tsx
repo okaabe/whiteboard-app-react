@@ -55,7 +55,8 @@ const Board = () => {
                     event,
                     isDrawing,
                     setDrawing,
-                    setElements
+                    setElements,
+                    contextRef: canvasCTXReference
                 })}
 
                 onMouseUp={(event) => tools.handleOnMouseUp(toolType, {
@@ -63,7 +64,8 @@ const Board = () => {
                     event,
                     isDrawing,
                     setDrawing,
-                    setElements
+                    setElements,
+                    contextRef: canvasCTXReference
                 })}
 
                 onMouseMove={(event) => tools.handleOnMouseMove(toolType, {
@@ -71,7 +73,8 @@ const Board = () => {
                     event,
                     isDrawing,
                     setDrawing,
-                    setElements
+                    setElements,
+                    contextRef: canvasCTXReference
                 })}
             />
             <ToolCase 
