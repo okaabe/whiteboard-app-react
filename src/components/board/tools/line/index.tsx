@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { ToolHandlingParams } from "../types"
 import { newLineShape } from "../../element"
 import logger from "../../../../hooks/toastify/logger"
@@ -25,7 +24,6 @@ export const handleOnMouseMove = ({
     elements,
     setElements,
     isDrawing,
-    setDrawing
 }: ToolHandlingParams) => {
     if (!isDrawing) {
         return
@@ -47,6 +45,6 @@ export const handleOnMouseMove = ({
     setElements(copied)
 }
 
-export const handleOnMouseUp = ({ setDrawing, elements, event, setElements }: ToolHandlingParams) => {
+export const handleOnMouseUp = ({ setDrawing, contextRef }: ToolHandlingParams) => {
     setDrawing(false)
 }

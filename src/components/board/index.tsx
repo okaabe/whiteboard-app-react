@@ -4,9 +4,9 @@ import ToolCase from "../toolCase"
 
 import { ElementShape, ToolType } from  "./types"
 import { drawElement } from "./drawer"
-import { newLineShape } from "./element"
 
 import * as tools from "./tools"
+import logger from "../../hooks/toastify/logger"
 
 const Board = () => {
     const [toolType, setToolType] = React.useState<ToolType>("line")
@@ -19,13 +19,17 @@ const Board = () => {
         const canvasHTMLElement: any = document.getElementById("whiteboard_canvas")
         const ctx: CanvasRenderingContext2D | null | undefined = canvasHTMLElement.getContext("2d")
 
-        canvasCTXReference.current = ctx
+        if (!ctx) {
+            return logger.error(`Canvas not supported`)
+        }
 
         ctx?.clearRect(
             0, 0,
             canvasHTMLElement.width,
             canvasHTMLElement.height
         )
+
+        canvasCTXReference.current = ctx
 
         elements.forEach((element) => {
             drawElement(

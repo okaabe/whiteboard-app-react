@@ -1,10 +1,9 @@
 import { MutableRefObject } from "react"
-import { SetState } from "../../../util/types"
-import { CanvasMouseEvent } from "../../tools/types"
+import { SetState, MouseEventProperties } from "../../../util/types"
 import { ElementShape } from "../types"
 
 export type ToolHandlingParams = {
-    event: CanvasMouseEvent
+    event: MouseEventProperties
 
     contextRef: MutableRefObject<CanvasRenderingContext2D | null | undefined>
     
