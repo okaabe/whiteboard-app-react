@@ -10,14 +10,7 @@ import * as tools from "./tools"
 
 const Board = () => {
     const [toolType, setToolType] = React.useState<ToolType>("line")
-    const [elements, setElements] = React.useState<ElementShape[]>([
-        newLineShape({
-            positionXEnd: 300,
-            positionXStart: 20,
-            positionYEnd: 200,
-            positionYStart: 200,
-        })
-    ])
+    const [elements, setElements] = React.useState<ElementShape[]>([])
     const [isDrawing, setDrawing] = React.useState<boolean>(false)
 
     const canvasCTXReference = React.useRef<CanvasRenderingContext2D | null | undefined>(null)
