@@ -25,6 +25,8 @@ const PencilTool = () => {
 
         contextRef.current = ctx
 
+        // console.log(points)
+
         points.forEach((point) => {
             contextRef.current?.lineTo(point.x, point.y)
             contextRef.current?.stroke()
@@ -42,7 +44,12 @@ const PencilTool = () => {
     const handleOnMouseMove = (event: CanvasMouseEvent) => {
         if (!isDrawing) return
 
-        setPoints((state) => [...state, MOUSE_POSITION])
+        // console.log(MOUSE_POSITION)
+        setPoints((state) => {
+            return [...state, MOUSE_POSITION]
+        })
+
+        console.log(points[points.length -1])
         contextRef.current?.moveTo(MOUSE_POSITION.x, MOUSE_POSITION.y)
 
         MOUSE_POSITION.x = event.clientX

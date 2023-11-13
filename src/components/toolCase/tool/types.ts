@@ -9,5 +9,5 @@ export type ToolBoxProperties = {
 }
 
 export type ToolBoxStyledProperties = {
-    isSelected: boolean
+    isselected: boolean
 }

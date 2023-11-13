@@ -5,3 +5,8 @@ export type Props = {
 }
 
 export type SetState <StateType> = Dispatch<SetStateAction<StateType>>
+
+export type MouseEventProperties = {
+    clientX: number
+    clientY: number
+}

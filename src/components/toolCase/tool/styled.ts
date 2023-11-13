@@ -15,9 +15,9 @@ const ToolBox = styled.div<ToolBoxStyledProperties>`
     background-color: ${UNSELECTED_TOOLBOX_BACKGROUND};
 
     ${(properties) => {
-        return properties.isSelected ?
+        return properties.isselected ?
             `border: solid 0.5px #000000;` :
-            ""
+            undefined
     }}
 
     display: flex;

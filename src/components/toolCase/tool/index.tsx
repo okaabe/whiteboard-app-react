@@ -6,7 +6,7 @@ import {
 import { ToolBoxProperties } from "./types"
 import { ToolType } from "../../board/types"
 
-export const isSelected = (name: ToolType, selectedTool: ToolType) => {
+export const isToolSelected = (name: ToolType, selectedTool: ToolType): boolean => {
     return name === selectedTool
 }
 
@@ -17,7 +17,7 @@ const Tool = (properties: ToolBoxProperties) => {
 
     return (
         <ToolBox
-            isSelected={isSelected(properties.name, properties.toolTypeSelected)}
+            isselected={isToolSelected(properties.name, properties.toolTypeSelected)}
             onClick={handleOnMouseClick}
         >
             {properties.name}
